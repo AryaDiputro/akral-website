@@ -1,0 +1,699 @@
+/* Reset dan Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #343434;
+  background-color: #fbf1e5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 20px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-logo h2 {
+  color: #c6bcaf;
+  font-weight: 700;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+}
+
+.nav-menu li {
+  margin-left: 2rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #c6bcaf;
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+}
+
+.nav-toggle button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.nav-toggle button:hover {
+  color: #c6bcaf;
+}
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #343434 0%, #c6bcaf 100%);
+  color: white;
+  padding-top: 80px; /* Offset untuk navbar fixed */
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-tagline {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #fff;
+  color: #007bff;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Styles */
+section {
+  padding: 5rem 0;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #c6bcaf;
+  position: relative;
+}
+
+section h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #007bff;
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+/* Tentang Section */
+.tentang-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.tentang-text {
+  flex: 1;
+}
+
+.tentang-text p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.tentang-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  color: #c6bcaf;
+  margin-bottom: 0.5rem;
+}
+
+.stat p {
+  color: #666;
+}
+
+/* Guru Section */
+.guru-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.guru-card {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.guru-card:hover {
+  transform: translateY(-10px);
+}
+
+.guru-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.guru-card h3 {
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-size: 1.3rem;
+}
+
+.guru-card p {
+  padding: 0 1.5rem 1.5rem;
+  color: #666;
+}
+
+/* Siswa Section */
+.siswa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.siswa-card {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.siswa-card:hover {
+  transform: translateY(-10px);
+}
+
+.siswa-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.siswa-card h3 {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.siswa-card p {
+  padding: 0 1rem 1rem;
+  color: #666;
+}
+
+/* Struktur Section */
+.struktur-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.struktur-item {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.struktur-item:hover {
+  transform: translateY(-10px);
+}
+
+.struktur-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #007bff;
+}
+
+.struktur-item i {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  opacity: 0.7;
+}
+
+.struktur-item h3 {
+  margin-bottom: 0.5rem;
+}
+
+.struktur-item p {
+  color: #666;
+}
+
+/* Galeri Section */
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.galeri-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.galeri-item:hover {
+  transform: scale(1.05);
+}
+
+.galeri-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.galeri-item:hover img {
+  transform: scale(1.1);
+}
+
+.galeri-item p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 2rem 1rem 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Jadwal Section */
+.jadwal-table {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.jadwal-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.jadwal-table th,
+.jadwal-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.jadwal-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+}
+
+.jadwal-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Quotes Section */
+.quotes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.quote-item {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.quote-item blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.quote-item blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: #c6bcaf;
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  opacity: 0.3;
+}
+
+.quote-item cite {
+  color: #666;
+  font-weight: 600;
+}
+
+.quote-item h3 {
+  margin-bottom: 1rem;
+  color: #c6bcaf;
+}
+
+.quote-item ul {
+  text-align: left;
+  padding-left: 1.5rem;
+}
+
+.quote-item li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+#footer {
+  background-color: #333;
+  color: white;
+  padding: 3rem 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 1rem;
+  color: #c6bcaf;
+}
+
+.footer-section p {
+  margin-bottom: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #007bff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #555;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode #navbar {
+  background-color: rgba(33, 33, 33, 0.95);
+}
+
+body.dark-mode .nav-menu a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .nav-toggle button {
+  color: #e0e0e0;
+}
+
+body.dark-mode section {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode .guru-card,
+body.dark-mode .siswa-card,
+body.dark-mode .struktur-item,
+body.dark-mode .galeri-item,
+body.dark-mode .quote-item,
+body.dark-mode .stat,
+body.dark-mode .jadwal-table {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+body.dark-mode .stat p,
+body.dark-mode .guru-card p,
+body.dark-mode .siswa-card p,
+body.dark-mode .struktur-item p,
+body.dark-mode .quote-item cite {
+  color: #b0b0b0;
+}
+
+body.dark-mode #footer {
+  background-color: #1a1a1a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    flex-direction: column;
+    padding: 1rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu li {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .tentang-content {
+    flex-direction: column;
+  }
+
+  .tentang-stats {
+    justify-content: center;
+  }
+
+  .struktur-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  .guru-grid,
+  .siswa-grid,
+  .galeri-grid,
+  .quotes-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animasi dan Transisi Tambahan */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Hover Effects */
+.btn-primary:hover,
+.guru-card:hover,
+.siswa-card:hover,
+.struktur-item:hover,
+.galeri-item:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus States untuk Accessibility */
+.nav-menu a:focus,
+.btn-primary:focus,
+.nav-toggle button:focus {
+  outline: 2px solid #c6bcaf;
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  #navbar,
+  .nav-toggle,
+  #hero {
+    display: none;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  .guru-card,
+  .siswa-card,
+  .struktur-item,
+  .galeri-item,
+  .quote-item,
+  .stat {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
