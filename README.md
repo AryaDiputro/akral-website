@@ -1,2 +1,0 @@
-# akral-website
-web kelas
