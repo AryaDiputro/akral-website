@@ -1,5 +1,6 @@
 const video = document.getElementById('camera');
 const status = document.getElementById('status');
+const indicator = document.getElementById('indicator');
 
 const hands = new Hands({
   locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`
@@ -8,9 +9,10 @@ const hands = new Hands({
 hands.setOptions({
   selfieMode: true,
   maxNumHands: 2,
-  modelComplexity: 1,
-  minDetectionConfidence: 0.6,
-  minTrackingConfidence: 0.5
+  modelComplexity: 0,
+  refineLandmarks: true,
+  minDetectionConfidence: 0.1,
+  minTrackingConfidence: 0.1
 });
 
 hands.onResults(onResults);
@@ -19,6 +21,12 @@ function setStatus(message, statusType = 'normal') {
   status.textContent = message;
   status.classList.toggle('error', statusType === 'error');
   status.classList.toggle('active', statusType === 'active');
+}
+
+function setIndicator(message, active = false) {
+  indicator.textContent = message;
+  indicator.classList.toggle('active', active);
+  indicator.classList.toggle('inactive', !active);
 }
 
 async function startCamera() {
@@ -37,8 +45,8 @@ async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
-        width: { ideal: 1280 },
-        height: { ideal: 720 },
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
         facingMode: { ideal: 'user' }
       },
       audio: false
@@ -47,6 +55,7 @@ async function startCamera() {
     video.srcObject = stream;
     await video.play();
     setStatus('Kamera aktif. Tunjukkan gesture 2 jari untuk blur.');
+    setIndicator('Menunggu deteksi...', false);
     requestAnimationFrame(processFrame);
   } catch (error) {
     console.error(error);
@@ -80,10 +89,14 @@ function onResults(results) {
     video.classList.remove('blur');
     status.textContent = 'Tunjukkan 2 jari (gesture V) untuk mengaktifkan blur.';
     status.classList.remove('active');
+    setIndicator('Tangan tidak terdeteksi', false);
     return;
   }
 
+  const handDetected = results.multiHandLandmarks.length > 0;
   const gestureActive = results.multiHandLandmarks.some(isTwoFingerGesture);
+
+  setIndicator(handDetected ? 'Tangan terdeteksi' : 'Tangan tidak terdeteksi', handDetected);
 
   if (gestureActive) {
     video.classList.add('blur');
