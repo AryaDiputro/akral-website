@@ -2,6 +2,13 @@ const video = document.getElementById('camera');
 const status = document.getElementById('status');
 const indicator = document.getElementById('indicator');
 
+const detectionHistory = {
+  hand: [],
+  gesture: []
+};
+const HISTORY_LENGTH = 6;
+const HISTORY_THRESHOLD = 2;
+
 const hands = new Hands({
   locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`
 });
@@ -9,10 +16,11 @@ const hands = new Hands({
 hands.setOptions({
   selfieMode: true,
   maxNumHands: 2,
-  modelComplexity: 0,
+  modelComplexity: 1,
   refineLandmarks: true,
-  minDetectionConfidence: 0.1,
-  minTrackingConfidence: 0.1
+  minDetectionConfidence: 0.35,
+  minTrackingConfidence: 0.35,
+  smoothLandmarks: true
 });
 
 hands.onResults(onResults);
@@ -84,19 +92,30 @@ async function processFrame() {
   requestAnimationFrame(processFrame);
 }
 
+function updateHistory(type, value) {
+  detectionHistory[type].push(value ? 1 : 0);
+  if (detectionHistory[type].length > HISTORY_LENGTH) {
+    detectionHistory[type].shift();
+  }
+  const sum = detectionHistory[type].reduce((acc, val) => acc + val, 0);
+  return sum >= HISTORY_THRESHOLD;
+}
+
 function onResults(results) {
-  if (!results.multiHandLandmarks || results.multiHandLandmarks.length === 0) {
+  const currentHandDetected = Array.isArray(results.multiHandLandmarks) && results.multiHandLandmarks.length > 0;
+  const currentGestureActive = currentHandDetected && results.multiHandLandmarks.some(isTwoFingerGesture);
+
+  const handDetected = updateHistory('hand', currentHandDetected);
+  const gestureActive = updateHistory('gesture', currentGestureActive);
+
+  setIndicator(handDetected ? 'Tangan terdeteksi' : 'Tangan tidak terdeteksi', handDetected);
+
+  if (!handDetected) {
     video.classList.remove('blur');
     status.textContent = 'Tunjukkan 2 jari (gesture V) untuk mengaktifkan blur.';
     status.classList.remove('active');
-    setIndicator('Tangan tidak terdeteksi', false);
     return;
   }
-
-  const handDetected = results.multiHandLandmarks.length > 0;
-  const gestureActive = results.multiHandLandmarks.some(isTwoFingerGesture);
-
-  setIndicator(handDetected ? 'Tangan terdeteksi' : 'Tangan tidak terdeteksi', handDetected);
 
   if (gestureActive) {
     video.classList.add('blur');
@@ -123,8 +142,9 @@ function isTwoFingerGesture(landmarks) {
   const middleUp = middleTip.y < middlePip.y;
   const ringDown = ringTip.y > ringPip.y;
   const pinkyDown = pinkyTip.y > pinkyPip.y;
+  const fingerSpread = Math.abs(indexTip.x - middleTip.x) > 0.05;
 
-  return indexUp && middleUp && ringDown && pinkyDown;
+  return indexUp && middleUp && ringDown && pinkyDown && fingerSpread;
 }
 
 startCamera();
