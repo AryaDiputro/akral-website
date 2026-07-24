@@ -51,10 +51,31 @@ video {
   background: rgba(0, 150, 255, 0.55);
 }
 
-#error {
-  color: #f33;
-}
-
 #status.error {
   background: rgba(180, 0, 0, 0.75);
+}
+
+.indicator {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  text-align: right;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.indicator.active {
+  background: rgba(0, 180, 0, 0.75);
+  border-color: rgba(0, 180, 0, 0.9);
+}
+
+.indicator.inactive {
+  background: rgba(180, 180, 180, 0.35);
+  border-color: rgba(255, 255, 255, 0.25);
 }
